@@ -1,47 +1,54 @@
 package com.codetutor.solidprinciples
 
-class EmailService {
-    fun sendMail(message: String){
-        //logic to send email
+interface EmailService {
+    fun sendMail(message: String)
+}
+
+class BasicEmailService : EmailService {
+    override fun sendMail(message: String) {
+        //logic to send basic email
     }
 }
 
-class AdvancedEmailService {
-    fun sendMail(message: String){
-        //logic to send email
+class AdvancedEmailService : EmailService {
+    override fun sendMail(message: String) {
+        //logic to send advanced email
     }
 }
 
-class NotificationService{
-    private var emailService: EmailService = EmailService()
-    fun notifyUser(message: String){
+class NotificationService(private val emailService: EmailService) {
+    fun notifyUser(message: String) {
         emailService.sendMail(message)
     }
 }
 
-class Logger {
-    fun log(message: String) {
+interface LoggerService {
+    fun log(message: String)
+}
+
+class Logger : LoggerService {
+    override fun log(message: String) {
         println("Log: $message")
     }
 }
 
-class UserService {
-    private val logger = Logger()
-
+class UserService(private val logger: LoggerService) {
     fun createUser(name: String) {
         logger.log("Creating user: $name")
     }
 }
 
-class DatabaseService {
-    fun save(data: String) {
+interface DatabaseService {
+    fun save(data: String)
+}
+
+class SqlDatabaseService : DatabaseService {
+    override fun save(data: String) {
         // Save to database
     }
 }
 
-class ServiceProvider {
-    private val databaseService = DatabaseService()
-
+class ServiceProvider(private val databaseService: DatabaseService) {
     fun addUser(name: String) {
         databaseService.save(name)
     }
