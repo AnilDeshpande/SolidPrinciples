@@ -1,4 +1,4 @@
-package com.codetutor.solidprinciples
+package com.codetutor.solidprinciples.ocp
 
 class PaymentProcessor {
     fun processPayment(paymentType: String, amount: Double) {

@@ -1,4 +1,4 @@
-package com.codetutor.solidprinciples
+package com.codetutor.solidprinciples.srp
 
 class EmailService {
     fun sendMail(message: String){

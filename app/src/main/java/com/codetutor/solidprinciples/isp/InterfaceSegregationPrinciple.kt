@@ -1,7 +1,5 @@
-package com.codetutor.solidprinciples
+package com.codetutor.solidprinciples.isp
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 interface Teacher {

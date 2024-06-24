@@ -1,4 +1,4 @@
-package com.codetutor.solidprinciples
+package com.codetutor.solidprinciples.lsp
 
 import androidx.lifecycle.ViewModel
 

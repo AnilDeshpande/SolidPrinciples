@@ -1,4 +1,4 @@
-package com.codetutor.solidprinciples
+package com.codetutor.solidprinciples.dip
 
 //LLM - Concrete Class
 class FileStorage {
