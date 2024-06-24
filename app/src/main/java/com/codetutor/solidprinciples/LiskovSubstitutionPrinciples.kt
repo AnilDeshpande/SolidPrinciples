@@ -23,48 +23,69 @@ class ProductViewModel : BaseViewModel() {
 }
 
 
+interface Shape {
+    fun getArea(): Int
+}
 
+interface Resizable : Shape {
+    fun resize(newShape: Shape)
+}
 
-open class Rectangle(var width: Int, var height: Int) {
-    open fun getArea(): Int {
+class Rectangle(private var width: Int, private var height: Int) : Shape, Resizable {
+    override fun getArea(): Int {
         return width * height
     }
-    fun resizeRectangle(rectangle: Rectangle,
-                        newWidth: Int,
-                        newHeight: Int) {
-        rectangle.width = newWidth
-        rectangle.height = newHeight
+
+    override fun resize(newShape: Shape) {
+        this.height = (newShape as Rectangle).height
+        this.width = newShape.width
     }
 }
 
-class Square(side: Int) : Rectangle(side, side) {}
+class Square(private var side: Int) : Shape {
+    override fun getArea(): Int {
+        return side * side
+    }
+
+    fun resizeSquare(newSide: Int) {
+        side = newSide
+    }
+}
 
 
-open class Bird {
-    open fun fly() {
+interface Flyable {
+    fun fly()
+}
+
+open class Bird : Flyable {
+    override fun fly() {
         println("Bird is flying")
     }
 }
 
-class Ostrich : Bird() {}
+class Ostrich
 
-fun makeBirdFly(bird: Bird) {
+fun makeBirdFly(bird: Flyable) {
     bird.fly()
 }
 
-class Engine {
-    fun startEngine() {
-        println("Starting the engine")
+interface Engine {
+    fun startEngine()
+}
+
+class GasEngine : Engine {
+    override fun startEngine() {
+        println("Starting the gas engine")
     }
 }
 
-open class Car(var engine: Engine) {
+open class Car(private var engine: Engine) {
     open fun startIgnition() {
         engine.startEngine()
     }
 }
 
-class ElectricCar(engine: Engine) : Car(engine) {}
+class ElectricCar(engine: Engine) : Car(engine)
 
 fun switchOnIgnition(car: Car) {
     car.startIgnition()
@@ -78,22 +99,22 @@ fun main() {
     println("Rectangle area: ${rectangle.getArea()}")
     println("Square area: ${square.getArea()}")
 
-    rectangle.resizeRectangle(rectangle, 30, 40)
+    //rectangle.resize(rectangle, 30, 40)
     println("New Rectangle area: ${rectangle.getArea()}")
 
-    square.resizeRectangle(square, 30, 40)
+    //square.resizeRectangle(square, 30, 40)
     println("New Square area: ${square.getArea()}")
 
     var sparrow = Bird()
     var ostrich = Ostrich()//Can't switch ostrich with sparrow
     makeBirdFly(sparrow)
-    makeBirdFly(ostrich)// Violates Liskov Substitution Principle
+    //makeBirdFly(ostrich)// Violates Liskov Substitution Principle
 
-    var car = Car(Engine())
-    var electricCar = ElectricCar(Engine())//Can't switch electric car with normal car,
+    var car = Car(GasEngine())
+    //var electricCar = ElectricCar(Engine())//Can't switch electric car with normal car,
     // being forced to pass the Engine for electric car
     switchOnIgnition(car)
-    switchOnIgnition(electricCar)// Violates Liskov Substitution Principle
+    //switchOnIgnition(electricCar)// Violates Liskov Substitution Principle
 
     val viewModels: List<BaseViewModel> = listOf(UserViewModel(), ProductViewModel())
     for (viewModel in viewModels) {
