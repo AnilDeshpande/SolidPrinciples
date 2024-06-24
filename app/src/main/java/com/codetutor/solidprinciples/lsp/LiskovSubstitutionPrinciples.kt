@@ -23,54 +23,6 @@ class ProductViewModel : BaseViewModel() {
 }
 
 
-
-
-open class Rectangle(var width: Int, var height: Int) {
-    open fun getArea(): Int {
-        return width * height
-    }
-    fun resizeRectangle(rectangle: Rectangle,
-                        newWidth: Int,
-                        newHeight: Int) {
-        rectangle.width = newWidth
-        rectangle.height = newHeight
-    }
-}
-
-class Square(side: Int) : Rectangle(side, side) {}
-
-
-open class Bird {
-    open fun fly() {
-        println("Bird is flying")
-    }
-}
-
-class Ostrich : Bird() {}
-
-fun makeBirdFly(bird: Bird) {
-    bird.fly()
-}
-
-class Engine {
-    fun startEngine() {
-        println("Starting the engine")
-    }
-}
-
-open class Car(var engine: Engine) {
-    open fun startIgnition() {
-        engine.startEngine()
-    }
-}
-
-class ElectricCar(engine: Engine) : Car(engine) {}
-
-fun switchOnIgnition(car: Car) {
-    car.startIgnition()
-}
-
-
 fun main() {
     var rectangle = Rectangle(10, 20)
     var square = Square(10)
