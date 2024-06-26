@@ -1,15 +1,5 @@
 package com.codetutor.solidprinciples.integrated
 
-
-
-
-
-
-
-
-
-
-
 class College(
     val departments: List<Department>,
     val staff: List<Staff>,
