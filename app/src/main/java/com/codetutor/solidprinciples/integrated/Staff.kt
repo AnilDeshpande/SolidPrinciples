@@ -5,8 +5,4 @@ class Staff(
     val type: String, // "Academic", "Non-Academic", "Visiting"
     var department: Department,
     val salary: Double // Visiting professors are paid per visit, not a fixed salary
-) {
-    fun engageStudents(subject: String, students: List<Student>) {
-        println("Engaging students in $subject")
-    }
-}
+)

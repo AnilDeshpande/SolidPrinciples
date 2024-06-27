@@ -5,13 +5,23 @@ class College(
     val staff: List<Staff>,
     val students: MutableList<Student>,
     val courses: List<Course>) {
+
+    private val staffManager = StaffManager(SalaryManager())
+    private val studentManager = StudentManager(EngagementManager())
+
     fun registerStudent(student: Student) {
-        println("Registering student: ${student.name}")
-        students.add(student)
+        studentManager.registerStudent(students, student)
     }
 
     fun assignStaffToDepartment(staff: Staff, department: Department) {
-        println("Assigning ${staff.name} to department: ${department.name}")
-        staff.department = department
+        staffManager.assignStaffToDepartment(staff, department)
+    }
+
+    fun calculateStaffSalary(staff: Staff): Double {
+        return staffManager.calculateStaffSalary(staff)
+    }
+
+    fun engageStudents(staff: Staff, subject: String, students: List<Student>) {
+        studentManager.engageStudents(staff, subject, students)
     }
 }
