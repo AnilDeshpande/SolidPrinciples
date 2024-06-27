@@ -7,22 +7,22 @@ skinparam class {
     BorderColor Black
 }
 
-class Staff {
-    +name: String
-    +type: String
-    +department: Department
-    +salary: Double
-    +engageStudents(subject: String, students: List<Student>)
-}
-
-class Department {
-    +name: String
-    +type: String
-}
-
 class Address {
     +localAddress: String?
     +homeAddress: String
+}
+
+class College {
+    +departments: List<Department>
+    +staff: List<Staff>
+    +students: MutableList<Student>
+    +courses: List<Course>
+    -staffManager: StaffManager
+    -studentManager: StudentManager
+    +registerStudent(student: Student)
+    +assignStaffToDepartment(staff: Staff, department: Department)
+    +calculateStaffSalary(staff: Staff): Double
+    +engageStudents(staff: Staff, subject: String, students: List<Student>)
 }
 
 class Course {
@@ -31,13 +31,29 @@ class Course {
     +department: Department
 }
 
-class College {
-    +departments: List<Department>
-    +staff: List<Staff>
-    +students: MutableList<Student>
-    +courses: List<Course>
-    +registerStudent(student: Student)
+class Department {
+    +name: String
+    +type: String
+}
+
+class EngagementManager {
+    +engageStudents(staff: Staff, subject: String, students: List<Student>)
+}
+
+class SalaryManager {
+    +calculateSalary(staff: Staff): Double
+}
+
+class Staff {
+    +name: String
+    +type: String
+    +department: Department
+    +salary: Double
+}
+
+class StaffManager {
     +assignStaffToDepartment(staff: Staff, department: Department)
+    +calculateStaffSalary(staff: Staff): Double
 }
 
 class Student {
@@ -50,12 +66,24 @@ class Student {
     +address: Address
 }
 
-Staff "1" -- "1" Department : has >
+class StudentManager {
+    +registerStudent(students: MutableList<Student>, student: Student)
+    +engageStudents(staff: Staff, subject: String, students: List<Student>)
+}
+
+Address "1" -- "1" Student : resides at >
 College "1" -- "*" Department : has >
 College "1" -- "*" Staff : has >
-College "1" -- "*" Course : offers >
-Course "1" -- "1" Department : belongs to >
-Student "1" -- "1" Department : belongs to >
-Student "1" -- "1" Address : lives at >
 College "1" -- "*" Student : has >
+College "1" -- "*" Course : offers >
+College "1" -- "1" StaffManager : uses >
+College "1" -- "1" StudentManager : uses >
+Course "1" -- "1" Department : belongs to >
+Department "1" -- "*" Staff : has >
+Department "1" -- "*" Student : has >
+EngagementManager "1" -- "1" StudentManager : uses >
+SalaryManager "1" -- "1" StaffManager : uses >
+Staff "1" -- "1" Department : belongs to >
+Student "1" -- "1" Department : belongs to >
+
 @enduml
