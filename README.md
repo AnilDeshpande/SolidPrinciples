@@ -1,9 +1,6 @@
 # SolidPrinciples
  Code explaining solid Principles violations and fixes
 
-Here is the simplified text format to be pasted in a GitHub Markdown file:
-
-
 # College System
 
 ## Departments
