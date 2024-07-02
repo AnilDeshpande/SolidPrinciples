@@ -54,3 +54,13 @@ Here is the simplified text format to be pasted in a GitHub Markdown file:
 ### UML diagram after Refactoring to make it compliant with Single Resposibility Principle - SRP
 <img width="1312" alt="Screenshot 2024-06-27 at 10 35 54 PM" src="https://github.com/AnilDeshpande/SolidPrinciples/assets/7361268/8f246fe7-9ebb-4a5c-b5a2-a5fba7a8a36a">
 
+### UML diagram after Refactoring to make it compliant with Open and Closed Principle - OCP
+#### New Interfaces were created `SalaryCalculator` & `EngagementStrategy`. 
+- Then there are concreate classes that implement these classes. 
+ - `AcademicSalaryCalculator` & `VisitingSalaryCalculator` implement `SalaryCalculator`
+ - `LectureEngagement` & `WorkShopEngagement` implement `SalaryCalculator`
+<img width="1410" alt="Screenshot 2024-07-02 at 11 40 26 AM" src="https://github.com/AnilDeshpande/SolidPrinciples/assets/7361268/c73ec9b7-8605-443d-b4cf-6bec871083fe">
+
+#### The Class  relation ship diagram.  
+<img width="1430" alt="Screenshot 2024-07-02 at 11 41 39 AM" src="https://github.com/AnilDeshpande/SolidPrinciples/assets/7361268/6463a833-9b6f-4cd0-8a20-e9396547b4c5">
+
