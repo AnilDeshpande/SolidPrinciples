@@ -1,4 +1,7 @@
-package com.codetutor.solidprinciples.integrated
+package com.codetutor.solidprinciples.integrated.managers
+
+import com.codetutor.solidprinciples.integrated.Department
+import com.codetutor.solidprinciples.integrated.Staff
 
 class StaffManager(private val salaryManager: SalaryManager) {
     fun assignStaffToDepartment(staff: Staff, department: Department) {

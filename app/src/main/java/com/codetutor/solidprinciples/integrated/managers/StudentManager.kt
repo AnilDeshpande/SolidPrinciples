@@ -1,4 +1,7 @@
-package com.codetutor.solidprinciples.integrated
+package com.codetutor.solidprinciples.integrated.managers
+
+import com.codetutor.solidprinciples.integrated.Staff
+import com.codetutor.solidprinciples.integrated.Student
 
 class StudentManager(private val engagementManager: EngagementManager) {
     fun registerStudent(students: MutableList<Student>, student: Student) {
