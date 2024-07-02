@@ -7,6 +7,14 @@ skinparam class {
     BorderColor Black
 }
 
+interface SalaryCalculator {
+    +calculateSalary(staff: Staff): Double
+}
+
+interface EngagementStrategy {
+    +engageStudents(staff: Staff, subject: String, students: List<Student>)
+}
+
 class Address {
     +localAddress: String?
     +homeAddress: String
@@ -19,6 +27,8 @@ class College {
     +courses: List<Course>
     -staffManager: StaffManager
     -studentManager: StudentManager
+    -salaryManager: SalaryManager
+    -engagementManager: EngagementManager
     +registerStudent(student: Student)
     +assignStaffToDepartment(staff: Staff, department: Department)
     +calculateStaffSalary(staff: Staff): Double
@@ -37,10 +47,12 @@ class Department {
 }
 
 class EngagementManager {
+    -strategies: Map<String, EngagementStrategy>
     +engageStudents(staff: Staff, subject: String, students: List<Student>)
 }
 
 class SalaryManager {
+    -calculators: Map<String, SalaryCalculator>
     +calculateSalary(staff: Staff): Double
 }
 
@@ -52,6 +64,7 @@ class Staff {
 }
 
 class StaffManager {
+    -salaryManager: SalaryManager
     +assignStaffToDepartment(staff: Staff, department: Department)
     +calculateStaffSalary(staff: Staff): Double
 }
@@ -67,6 +80,7 @@ class Student {
 }
 
 class StudentManager {
+    -engagementManager: EngagementManager
     +registerStudent(students: MutableList<Student>, student: Student)
     +engageStudents(staff: Staff, subject: String, students: List<Student>)
 }
@@ -78,6 +92,8 @@ College "1" -- "*" Student : has >
 College "1" -- "*" Course : offers >
 College "1" -- "1" StaffManager : uses >
 College "1" -- "1" StudentManager : uses >
+College "1" -- "1" SalaryManager : uses >
+College "1" -- "1" EngagementManager : uses >
 Course "1" -- "1" Department : belongs to >
 Department "1" -- "*" Staff : has >
 Department "1" -- "*" Student : has >
@@ -85,5 +101,10 @@ EngagementManager "1" -- "1" StudentManager : uses >
 SalaryManager "1" -- "1" StaffManager : uses >
 Staff "1" -- "1" Department : belongs to >
 Student "1" -- "1" Department : belongs to >
+
+SalaryCalculator <|.. AcademicSalaryCalculator : implements
+SalaryCalculator <|.. VisitingSalaryCalculator : implements
+EngagementStrategy <|.. LectureEngagement : implements
+EngagementStrategy <|.. WorkshopEngagement : implements
 
 @enduml
