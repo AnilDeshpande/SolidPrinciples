@@ -1,6 +1,15 @@
 package com.codetutor.solidprinciples.integrated
 
-class Department(
-    val name: String,
-    val type: String // "Academic" or "Non-Academic"
+// Abstract base class
+abstract class Department(
+    val name: String
 )
+
+// Subclasses
+class AcademicDepartment(
+    name: String
+) : Department(name)
+
+class NonAcademicDepartment(
+    name: String
+) : Department(name)

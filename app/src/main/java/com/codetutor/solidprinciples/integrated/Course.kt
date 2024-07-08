@@ -1,7 +1,48 @@
 package com.codetutor.solidprinciples.integrated
 
-class Course(
+// Abstract base class
+abstract class Course(
     val name: String,
-    val tenure: Int?, // Duration for Undergraduate, Post Graduate; null for P.Hd, Post Doc
     val department: Department
-)
+) {
+    abstract fun getTenure(): Int?
+}
+
+// Subclasses
+class UndergraduateCourse(
+    name: String,
+    department: Department,
+    private val tenure: Int // Duration for Undergraduate
+) : Course(name, department) {
+    override fun getTenure(): Int? {
+        return tenure
+    }
+}
+
+class PostGraduateCourse(
+    name: String,
+    department: Department,
+    private val tenure: Int // Duration for Post Graduate
+) : Course(name, department) {
+    override fun getTenure(): Int? {
+        return tenure
+    }
+}
+
+class PhdCourse(
+    name: String,
+    department: Department
+) : Course(name, department) {
+    override fun getTenure(): Int? {
+        return null
+    }
+}
+
+class PostDocCourse(
+    name: String,
+    department: Department
+) : Course(name, department) {
+    override fun getTenure(): Int? {
+        return null
+    }
+}
