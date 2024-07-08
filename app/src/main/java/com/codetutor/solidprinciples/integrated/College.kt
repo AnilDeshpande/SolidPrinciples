@@ -6,7 +6,6 @@ import com.codetutor.solidprinciples.integrated.calculators.VisitingSalaryCalcul
 import com.codetutor.solidprinciples.integrated.managers.EngagementManager
 import com.codetutor.solidprinciples.integrated.managers.EngagementStrategy
 import com.codetutor.solidprinciples.integrated.managers.LectureEngagement
-import com.codetutor.solidprinciples.integrated.managers.SalaryManager
 import com.codetutor.solidprinciples.integrated.managers.StaffManager
 import com.codetutor.solidprinciples.integrated.managers.StudentManager
 import com.codetutor.solidprinciples.integrated.managers.WorkshopEngagement
@@ -17,7 +16,6 @@ class College(
     val students: MutableList<Student>,
     val courses: List<Course>) {
 
-    private var salaryManager : SalaryManager
     private var staffManager: StaffManager
 
     private var engagementManager: EngagementManager
@@ -36,8 +34,7 @@ class College(
             // Add more entries as needed
         )
 
-        salaryManager = SalaryManager(calculators)
-        staffManager = StaffManager(salaryManager)
+        staffManager = StaffManager()
 
         engagementManager  = EngagementManager(engagementStrategies)
         studentManager = StudentManager(engagementManager)
@@ -49,10 +46,6 @@ class College(
 
     fun assignStaffToDepartment(staff: Staff, department: Department) {
         staffManager.assignStaffToDepartment(staff, department)
-    }
-
-    fun calculateStaffSalary(staff: Staff): Double {
-        return staffManager.calculateStaffSalary(staff)
     }
 
     fun engageStudents(staff: Staff, subject: String, students: List<Student>) {
