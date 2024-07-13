@@ -1,0 +1,33 @@
+@startuml
+!define KO_KOTLIN
+!define KO_ICON
+skinparam class {
+    BackgroundColor White
+    ArrowColor SeaGreen
+    BorderColor Black
+}
+
+Department <|-- AcademicDepartment
+Department <|-- NonAcademicDepartment
+
+Student <|-- UndergraduateStudent
+Student <|-- PostGraduateStudent
+Student <|-- PhdStudent
+Student <|-- PostDocStudent
+
+Course <|-- UndergraduateCourse
+Course <|-- PostGraduateCourse
+Course <|-- PhdCourse
+Course <|-- PostDocCourse
+
+Staff <|-- AcademicStaff
+Staff <|-- NonAcademicStaff
+Staff <|-- VisitingStaff
+
+SalaryCalculator <|.. AcademicSalaryCalculator
+SalaryCalculator <|.. VisitingSalaryCalculator
+
+EngagementStrategy <|.. LectureEngagement
+EngagementStrategy <|.. WorkshopEngagement
+
+@enduml
