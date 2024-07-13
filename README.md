@@ -59,8 +59,49 @@ Here is the simplified text format to be pasted in a GitHub Markdown file:
 - Then there are concreate classes that implement these classes. 
  - `AcademicSalaryCalculator` & `VisitingSalaryCalculator` implement `SalaryCalculator`
  - `LectureEngagement` & `WorkShopEngagement` implement `SalaryCalculator`
-<img width="1410" alt="Screenshot 2024-07-02 at 11 40 26 AM" src="https://github.com/AnilDeshpande/SolidPrinciples/assets/7361268/c73ec9b7-8605-443d-b4cf-6bec871083fe">
+<img width="1410" alt="Screenshot 2024-07-02 at 11 40 26 AM" src="https://github.com/AnilDeshpande/SolidPrinciples/blob/ocp-compliant/ClassHirachy.png">
 
 #### The Class  relation ship diagram.  
-<img width="1430" alt="Screenshot 2024-07-02 at 11 41 39 AM" src="https://github.com/AnilDeshpande/SolidPrinciples/assets/7361268/6463a833-9b6f-4cd0-8a20-e9396547b4c5">
+<img width="1430" alt="Screenshot 2024-07-02 at 11 41 39 AM" src="https://github.com/AnilDeshpande/SolidPrinciples/blob/ocp-compliant/ClassDiagrams.png">
+Based on the provided information, here are the total number of classes and interfaces:
 
+### Classes
+1. **College**
+2. **AcademicDepartment** (extends Department)
+3. **NonAcademicDepartment** (extends Department)
+4. **UndergraduateStudent** (extends Student)
+5. **PostGraduateStudent** (extends Student)
+6. **PhdStudent** (extends Student)
+7. **PostDocStudent** (extends Student)
+8. **UndergraduateCourse** (extends Course)
+9. **PostGraduateCourse** (extends Course)
+10. **PhdCourse** (extends Course)
+11. **PostDocCourse** (extends Course)
+12. **AcademicStaff** (extends Staff)
+13. **NonAcademicStaff** (extends Staff)
+14. **VisitingStaff** (extends Staff)
+15. **Address**
+16. **WorkshopEngagement** (implements EngagementStrategy)
+17. **LectureEngagement** (implements EngagementStrategy)
+18. **StaffManager**
+19. **EngagementManager**
+20. **StudentManager**
+21. **AcademicSalaryCalculator** (implements SalaryCalculator)
+22. **VisitingSalaryCalculator** (implements SalaryCalculator)
+
+### Interfaces
+1. **SalaryCalculator**
+2. **EngagementStrategy**
+
+### Abstract Classes
+1. **Department**
+2. **Student**
+3. **Course**
+4. **Staff**
+
+### Total
+- **Classes**: 22
+- **Interfaces**: 2
+- **Abstract Classes**: 4
+
+So, there are a total of **28 classes and interfaces** in the refactored code.
