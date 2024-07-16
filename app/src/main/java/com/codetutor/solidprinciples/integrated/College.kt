@@ -11,44 +11,34 @@ import com.codetutor.solidprinciples.integrated.managers.StudentManager
 import com.codetutor.solidprinciples.integrated.managers.WorkshopEngagement
 
 class College(
-    val departments: List<Department>,
-    val staff: List<Staff>,
-    val students: MutableList<Student>,
-    val courses: List<Course>) {
+    private val staffManager: StaffManager,
+    private val studentManager: StudentManager,
+    private val engagementManager: EngagementManager
+) {
+    private val departments: MutableList<Department> = mutableListOf()
+    private val staff: MutableList<Staff> = mutableListOf()
+    private val students: MutableList<Student> = mutableListOf()
+    private val courses: MutableList<Course> = mutableListOf()
 
-    private var staffManager: StaffManager
-
-    private var engagementManager: EngagementManager
-    private var studentManager: StudentManager
-
-    init {
-        val calculators: Map<String, SalaryCalculator> = mapOf(
-            "Academic" to AcademicSalaryCalculator(),
-            "Visiting" to VisitingSalaryCalculator()
-            // Add more entries as needed
-        )
-
-        val engagementStrategies: Map<String, EngagementStrategy> = mapOf(
-            "Academic" to LectureEngagement(),
-            "Visiting" to WorkshopEngagement()
-            // Add more entries as needed
-        )
-
-        staffManager = StaffManager()
-
-        engagementManager  = EngagementManager(engagementStrategies)
-        studentManager = StudentManager(engagementManager)
+    fun addDepartment(department: Department) {
+        departments.add(department)
     }
 
-    fun registerStudent(student: Student) {
-        studentManager.registerStudent(students, student)
+    fun addStudent(student: Student) {
+        students.add(student)
+        studentManager.registerStudent(students,student)
     }
 
-    fun assignStaffToDepartment(staff: Staff, department: Department) {
-        staffManager.assignStaffToDepartment(staff, department)
+    fun addCourse(course: Course) {
+        courses.add(course)
     }
 
-    fun engageStudents(staff: Staff, subject: String, students: List<Student>) {
-        studentManager.engageStudents(staff, subject, students)
+    fun assignStaffToDepartment(staffMember: Staff, department: Department) {
+        staffManager.assignStaffToDepartment(staffMember, department)
+    }
+
+    fun engageStudents(staffMember: Staff, subject: String, students: List<Student>) {
+        engagementManager.engageStudents(staffMember, subject, students)
     }
 }
+
