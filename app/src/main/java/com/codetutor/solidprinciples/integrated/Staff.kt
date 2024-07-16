@@ -51,7 +51,7 @@ class VisitingStaff(
     , salaryCalculator: SalaryCalculator
 ) : Staff(name, department, salaryCalculator) {
     override fun getSalary(): Double {
-        return salaryCalculator.calculateSalary(this)
+        throw UnsupportedOperationException("VisitingStaff do not regular salary, they are paid per visit")
     }
 
     override fun engageStudents(subject: String, students: List<Student>, strategy: EngagementStrategy) {

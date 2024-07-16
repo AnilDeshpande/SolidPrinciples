@@ -61,6 +61,6 @@ class PostDocStudent(
     address: Address
 ) : Student(name, age, dateOfBirth, department, currentSemester, address) {
     override fun getCourseType(): String {
-        return "Post Doc"
+        throw UnsupportedOperationException("PostDoc students do not have a course type")
     }
 }
