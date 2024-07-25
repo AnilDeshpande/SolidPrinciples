@@ -34,7 +34,7 @@ class PhdCourse(
     department: Department
 ) : Course(name, department) {
     override fun getTenure(): Int? {
-        return null
+        throw UnsupportedOperationException("PhdCourse doesn't have fixed tenure")
     }
 }
 
@@ -43,6 +43,6 @@ class PostDocCourse(
     department: Department
 ) : Course(name, department) {
     override fun getTenure(): Int? {
-        return null
+        throw UnsupportedOperationException("PostDocCourse doesn't have fixed tenure")
     }
 }
