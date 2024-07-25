@@ -15,19 +15,31 @@ Student <|-- PostGraduateStudent
 Student <|-- PhdStudent
 Student <|-- PostDocStudent
 
-Course <|-- UndergraduateCourse
-Course <|-- PostGraduateCourse
-Course <|-- PhdCourse
-Course <|-- PostDocCourse
+CourseTypeProvider <|.. UndergraduateStudent
+CourseTypeProvider <|.. PostGraduateStudent
+CourseTypeProvider <|.. PhdStudent
 
 Staff <|-- AcademicStaff
 Staff <|-- NonAcademicStaff
 Staff <|-- VisitingStaff
 
-SalaryCalculator <|.. AcademicSalaryCalculator
-SalaryCalculator <|.. VisitingSalaryCalculator
+SalaryReceiver <|.. AcademicStaff
+SalaryReceiver <|.. NonAcademicStaff
+
+Course <|-- UndergraduateCourse
+Course <|-- PostGraduateCourse
+Course <|-- PhdCourse
+Course <|-- PostDocCourse
+
+TenureProvider <|.. UndergraduateCourse
+TenureProvider <|.. PostGraduateCourse
+
+Address <|.. DetailedAddress
 
 EngagementStrategy <|.. LectureEngagement
 EngagementStrategy <|.. WorkshopEngagement
+
+SalaryCalculator <|.. AcademicSalaryCalculator
+SalaryCalculator <|.. VisitingSalaryCalculator
 
 @enduml

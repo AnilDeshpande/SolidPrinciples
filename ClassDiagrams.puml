@@ -7,173 +7,152 @@ skinparam class {
     BorderColor Black
 }
 
-package "com.codetutor.solidprinciples.integrated" {
+package com.codetutor.solidprinciples.integrated {
+
     class College {
-        List<Department> departments
-        List<Staff> staff
-        MutableList<Student> students
-        List<Course> courses
-        StaffManager staffManager
-        EngagementManager engagementManager
-        StudentManager studentManager
+        - staffManager: StaffManager
+        - studentManager: StudentManager
+        - engagementManager: EngagementManager
+        - departments: MutableList<Department>
+        - staff: MutableList<Staff>
+        - students: MutableList<Student>
+        - courses: MutableList<Course>
+        + addDepartment(department: Department)
+        + addStudent(student: Student)
+        + addCourse(course: Course)
+        + assignStaffToDepartment(staffMember: Staff, department: Department)
+        + engageStudents(staffMember: Staff, subject: String, students: List<Student>)
     }
 
     abstract class Department {
-        String name
+        - name: String
     }
 
     class AcademicDepartment extends Department
     class NonAcademicDepartment extends Department
 
-    class Address {
-        String localAddress
-        String homeAddress
-    }
-
     abstract class Student {
-        String name
-        int age
-        String dateOfBirth
-        Department department
-        int currentSemester
-        Address address
-        abstract String getCourseType()
+        - name: String
+        - age: Int
+        - dateOfBirth: String
+        - department: Department
+        - currentSemester: Int
+        - address: Address
     }
 
-    class UndergraduateStudent extends Student {
-        String getCourseType()
+    interface CourseTypeProvider {
+        + getCourseType(): String
     }
 
-    class PostGraduateStudent extends Student {
-        String getCourseType()
-    }
-
-    class PhdStudent extends Student {
-        String getCourseType()
-    }
-
-    class PostDocStudent extends Student {
-        String getCourseType()
-    }
-
-    abstract class Course {
-        String name
-        Department department
-        abstract Integer getTenure()
-    }
-
-    class UndergraduateCourse extends Course {
-        int tenure
-        Integer getTenure()
-    }
-
-    class PostGraduateCourse extends Course {
-        int tenure
-        Integer getTenure()
-    }
-
-    class PhdCourse extends Course {
-        Integer getTenure()
-    }
-
-    class PostDocCourse extends Course {
-        Integer getTenure()
-    }
+    class UndergraduateStudent extends Student implements CourseTypeProvider
+    class PostGraduateStudent extends Student implements CourseTypeProvider
+    class PhdStudent extends Student implements CourseTypeProvider
+    class PostDocStudent extends Student
 
     abstract class Staff {
-        String name
-        Department department
-        SalaryCalculator salaryCalculator
-        abstract Double getSalary()
-        abstract void engageStudents(String subject, List<Student> students, EngagementStrategy strategy)
+        - name: String
+        - department: Department
+        - salaryCalculator: SalaryCalculator
+        + engageStudents(subject: String, students: List<Student>, strategy: EngagementStrategy)
     }
 
-    class AcademicStaff extends Staff {
-        double salary
-        Double getSalary()
-        void engageStudents(String subject, List<Student> students, EngagementStrategy strategy)
+    interface SalaryReceiver {
+        + getSalary(): Double
     }
 
-    class NonAcademicStaff extends Staff {
-        double salary
-        Double getSalary()
-        void engageStudents(String subject, List<Student> students, EngagementStrategy strategy)
+    class AcademicStaff extends Staff implements SalaryReceiver
+    class NonAcademicStaff extends Staff implements SalaryReceiver
+    class VisitingStaff extends Staff
+
+    abstract class Course {
+        - name: String
+        - department: Department
     }
 
-    class VisitingStaff extends Staff {
-        double payPerVisit
-        Double getSalary()
-        void engageStudents(String subject, List<Student> students, EngagementStrategy strategy)
+    interface TenureProvider {
+        + getTenure(): Int?
+    }
+
+    class UndergraduateCourse extends Course implements TenureProvider
+    class PostGraduateCourse extends Course implements TenureProvider
+    class PhdCourse extends Course
+    class PostDocCourse extends Course
+
+    interface DetailedAddress {
+        + getFullAddress(): String
+        + getLocalAddress(): String
+        + getHomeAddress(): String
+        + getPostalCode(): String
+    }
+
+    class Address implements DetailedAddress {
+        - localAddress: String?
+        - homeAddress: String
+    }
+
+    package managers {
+        class EngagementManager {
+            - strategies: Map<String, EngagementStrategy>
+            + engageStudents(staff: Staff, subject: String, students: List<Student>)
+        }
+
+        class StaffManager {
+            + assignStaffToDepartment(staff: Staff, department: Department)
+        }
+
+        class StudentManager {
+            - engagementManager: EngagementManager
+            + registerStudent(students: MutableList<Student>, student: Student)
+            + engageStudents(staff: Staff, subject: String, students: List<Student>)
+        }
+
+        interface EngagementStrategy {
+            + engageStudents(staff: Staff, subject: String, students: List<Student>)
+            + prepareMaterials(staff: Staff, subject: String)
+        }
+
+        class LectureEngagement implements EngagementStrategy
+        class WorkshopEngagement implements EngagementStrategy
+    }
+
+    package calculators {
+        interface SalaryCalculator {
+            + calculateSalary(staff: Staff): Double
+            + generatePaySlip(staff: Staff): String
+            + applyBonus(staff: Staff, bonus: Double): Double
+            + deductTaxes(staff: Staff, tax: Double): Double
+        }
+
+        class AcademicSalaryCalculator implements SalaryCalculator
+        class VisitingSalaryCalculator implements SalaryCalculator
     }
 }
-
-package "com.codetutor.solidprinciples.integrated.calculators" {
-    interface SalaryCalculator {
-        Double calculateSalary(Staff staff)
-    }
-
-    class AcademicSalaryCalculator implements SalaryCalculator {
-        Double calculateSalary(Staff staff)
-    }
-
-    class VisitingSalaryCalculator implements SalaryCalculator {
-        Double calculateSalary(Staff staff)
-    }
-}
-
-package "com.codetutor.solidprinciples.integrated.managers" {
-    interface EngagementStrategy {
-        void engageStudents(Staff staff, String subject, List<Student> students)
-    }
-
-    class LectureEngagement implements EngagementStrategy {
-        void engageStudents(Staff staff, String subject, List<Student> students)
-    }
-
-    class WorkshopEngagement implements EngagementStrategy {
-        void engageStudents(Staff staff, String subject, List<Student> students)
-    }
-
-    class StaffManager {
-        void assignStaffToDepartment(Staff staff, Department department)
-    }
-
-    class EngagementManager {
-        Map<String, EngagementStrategy> strategies
-        void engageStudents(Staff staff, String subject, List<Student> students)
-    }
-
-    class StudentManager {
-        EngagementManager engagementManager
-        void registerStudent(MutableList<Student> students, Student student)
-        void engageStudents(Staff staff, String subject, List<Student> students)
-    }
-}
-
-College "1" -- "*" Department : has >
-College "1" -- "*" Staff : has >
-College "1" -- "*" Student : has >
-College "1" -- "*" Course : offers >
-College "1" -- "1" StaffManager : uses >
-College "1" -- "1" StudentManager : uses >
-College "1" -- "1" EngagementManager : uses >
-
-Staff "1" -- "1" Department : belongs to >
-Staff "1" -- "1" SalaryCalculator : calculates >
 
 Student "1" -- "1" Department : belongs to >
 Student "1" -- "1" Address : resides at >
-
 Course "1" -- "1" Department : belongs to >
-
 StudentManager "1" -- "1" EngagementManager : uses >
 StudentManager "1" -- "*" Student : manages >
-
+Staff "1" -- "1" Department : assigned to >
+Staff "1" -- "1" SalaryCalculator : uses >
+College "1" -- "1" StaffManager : has >
+College "1" -- "1" StudentManager : has >
+College "1" -- "1" EngagementManager : has >
 EngagementManager "1" -- "*" EngagementStrategy : uses >
-EngagementManager "1" -- "*" Staff : engages >
-EngagementManager "1" -- "*" Student : engages >
-
-StaffManager "1" -- "*" Staff : manages >
-StaffManager "1" -- "1" Department : assigns to >
+LectureEngagement "1" -- "1" EngagementStrategy : implements >
+WorkshopEngagement "1" -- "1" EngagementStrategy : implements >
+AcademicStaff "1" -- "1" SalaryCalculator : uses >
+NonAcademicStaff "1" -- "1" SalaryCalculator : uses >
+VisitingStaff "1" -- "1" SalaryCalculator : uses >
+AcademicSalaryCalculator "1" -- "1" SalaryCalculator : implements >
+VisitingSalaryCalculator "1" -- "1" SalaryCalculator : implements >
+SalaryReceiver <|-- AcademicStaff
+SalaryReceiver <|-- NonAcademicStaff
+CourseTypeProvider <|-- UndergraduateStudent
+CourseTypeProvider <|-- PostGraduateStudent
+CourseTypeProvider <|-- PhdStudent
+TenureProvider <|-- UndergraduateCourse
+TenureProvider <|-- PostGraduateCourse
+DetailedAddress <|.. Address
 
 @enduml

@@ -105,3 +105,49 @@ Based on the provided information, here are the total number of classes and inte
 - **Abstract Classes**: 4
 
 So, there are a total of **28 classes and interfaces** in the refactored code.
+
+### UML diagram after Refactoring to make it compliant with Open and Closed Principle - OCP
+
+# Class, Abstract Class, and Interface Summary
+Total Number of classes, Abstract Classes and Interfaces - 32
+## Classes
+Total: 22
+1. College
+2. AcademicDepartment
+3. NonAcademicDepartment
+4. UndergraduateStudent
+5. PostGraduateStudent
+6. PhdStudent
+7. PostDocStudent
+8. AcademicStaff
+9. NonAcademicStaff
+10. VisitingStaff
+11. UndergraduateCourse
+12. PostGraduateCourse
+13. PhdCourse
+14. PostDocCourse
+15. Address
+16. EngagementManager
+17. StaffManager
+18. StudentManager
+19. LectureEngagement
+20. WorkshopEngagement
+21. AcademicSalaryCalculator
+22. VisitingSalaryCalculator
+
+## Abstract Classes
+Total: 4
+1. Department
+2. Student
+3. Staff
+4. Course
+
+## Interfaces
+Total: 6
+1. CourseTypeProvider
+2. SalaryReceiver
+3. TenureProvider
+4. DetailedAddress
+5. EngagementStrategy
+6. SalaryCalculator
+
