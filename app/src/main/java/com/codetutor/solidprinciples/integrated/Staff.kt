@@ -9,8 +9,12 @@ abstract class Staff(
     var department: Department,
     var salaryCalculator: SalaryCalculator
 ) {
-    abstract fun getSalary(): Double
+
     abstract fun engageStudents(subject: String, students: List<Student>, strategy: EngagementStrategy)
+}
+
+interface SalaryReceivingStaff{
+    fun getSalary(): Double
 }
 
 // Subclasses
@@ -19,7 +23,7 @@ class AcademicStaff(
     department: Department,
     private val salary: Double // Fixed salary for Academic staff
     , salaryCalculator: SalaryCalculator
-) : Staff(name, department, salaryCalculator) {
+) : Staff(name, department, salaryCalculator), SalaryReceivingStaff {
     override fun getSalary(): Double {
         return salaryCalculator.calculateSalary(this)
     }
@@ -34,7 +38,7 @@ class NonAcademicStaff(
     department: Department,
     private val salary: Double // Fixed salary for Non-Academic staff
     , salaryCalculator: SalaryCalculator
-) : Staff(name, department, salaryCalculator) {
+) : Staff(name, department, salaryCalculator), SalaryReceivingStaff {
     override fun getSalary(): Double {
         return salaryCalculator.calculateSalary(this)
     }
@@ -50,10 +54,7 @@ class VisitingStaff(
     private val payPerVisit: Double // Pay per visit for Visiting staff
     , salaryCalculator: SalaryCalculator
 ) : Staff(name, department, salaryCalculator) {
-    override fun getSalary(): Double {
-        throw UnsupportedOperationException("VisitingStaff do not regular salary, they are paid per visit")
-    }
-
+    
     override fun engageStudents(subject: String, students: List<Student>, strategy: EngagementStrategy) {
         strategy.engageStudents(this, subject, students)
     }

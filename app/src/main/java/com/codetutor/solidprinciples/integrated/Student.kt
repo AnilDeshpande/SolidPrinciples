@@ -9,7 +9,11 @@ abstract class Student(
     val currentSemester: Int,
     val address: Address
 ) {
-    abstract fun getCourseType(): String
+
+}
+
+interface CourseTypeProvider{
+    fun getCourseType(): String
 }
 
 // Subclasses
@@ -20,7 +24,7 @@ class UndergraduateStudent(
     department: Department,
     currentSemester: Int,
     address: Address
-) : Student(name, age, dateOfBirth, department, currentSemester, address) {
+) : Student(name, age, dateOfBirth, department, currentSemester, address), CourseTypeProvider {
     override fun getCourseType(): String {
         return "Undergraduate"
     }
@@ -33,7 +37,7 @@ class PostGraduateStudent(
     department: Department,
     currentSemester: Int,
     address: Address
-) : Student(name, age, dateOfBirth, department, currentSemester, address) {
+) : Student(name, age, dateOfBirth, department, currentSemester, address), CourseTypeProvider {
     override fun getCourseType(): String {
         return "Post Graduate"
     }
@@ -46,7 +50,7 @@ class PhdStudent(
     department: Department,
     currentSemester: Int,
     address: Address
-) : Student(name, age, dateOfBirth, department, currentSemester, address) {
+) : Student(name, age, dateOfBirth, department, currentSemester, address), CourseTypeProvider {
     override fun getCourseType(): String {
         return "P.Hd"
     }
@@ -60,7 +64,4 @@ class PostDocStudent(
     currentSemester: Int,
     address: Address
 ) : Student(name, age, dateOfBirth, department, currentSemester, address) {
-    override fun getCourseType(): String {
-        throw UnsupportedOperationException("PostDoc students do not have a course type")
-    }
 }
