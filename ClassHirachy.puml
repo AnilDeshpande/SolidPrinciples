@@ -30,4 +30,18 @@ SalaryCalculator <|.. VisitingSalaryCalculator
 EngagementStrategy <|.. LectureEngagement
 EngagementStrategy <|.. WorkshopEngagement
 
+DetailedAddress <|.. Address
+
+CourseTypeProvider <|.. UndergraduateStudent
+CourseTypeProvider <|.. PostGraduateStudent
+CourseTypeProvider <|.. PhdStudent
+
+TenureProvider <|.. UndergraduateCourse
+TenureProvider <|.. PostGraduateCourse
+
+MaterialPreperator <|.. LectureEngagement
+
+SalaryReceivingStaff <|.. AcademicStaff
+SalaryReceivingStaff <|.. NonAcademicStaff
+
 @enduml

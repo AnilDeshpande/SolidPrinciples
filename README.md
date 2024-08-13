@@ -105,3 +105,65 @@ Based on the provided information, here are the total number of classes and inte
 - **Abstract Classes**: 4
 
 So, there are a total of **28 classes and interfaces** in the refactored code.
+
+### Number of classes after ISP refactoring is done
+## Project Structure Overview
+
+This project consists of several classes, interfaces, and abstract classes, organized as follows:
+
+## Project Structure Overview
+
+This project consists of several classes, interfaces, and abstract classes, organized as follows:
+
+### Total Count:
+
+- **Classes**: 22
+- **Interfaces**: 10
+- **Abstract Classes**: 5
+
+### Breakdown:
+
+#### Classes (22):
+1. `College`
+2. `AcademicDepartment`
+3. `NonAcademicDepartment`
+4. `UndergraduateStudent`
+5. `PostGraduateStudent`
+6. `PhdStudent`
+7. `PostDocStudent`
+8. `UndergraduateCourse`
+9. `PostGraduateCourse`
+10. `PhdCourse`
+11. `PostDocCourse`
+12. `AcademicStaff`
+13. `NonAcademicStaff`
+14. `VisitingStaff`
+15. `Address`
+16. `StaffManager`
+17. `StudentManager`
+18. `EngagementManager`
+19. `WorkshopEngagement`
+20. `LectureEngagement`
+21. `AcademicSalaryCalculator`
+22. `VisitingSalaryCalculator`
+
+#### Interfaces (10):
+1. `CourseTypeProvider`
+2. `SalaryReceivingStaff`
+3. `SalaryCalculator`
+4. `PayslipGenerator`
+5. `BonusApplier`
+6. `TDSCalculator`
+7. `EngagementStrategy`
+8. `TenureProvider`
+9. `DetailedAddress`
+10. `MaterialPreperator`
+
+#### Abstract Classes (5):
+1. `Department`
+2. `Student`
+3. `Staff`
+4. `Course`
+5. `EngagementStrategy` (can be interpreted as an abstract class in some contexts)
+
+
