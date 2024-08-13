@@ -107,9 +107,6 @@ Based on the provided information, here are the total number of classes and inte
 So, there are a total of **28 classes and interfaces** in the refactored code.
 
 ### Number of classes after ISP refactoring is done
-## Project Structure Overview
-
-This project consists of several classes, interfaces, and abstract classes, organized as follows:
 
 ## Project Structure Overview
 
@@ -165,5 +162,13 @@ This project consists of several classes, interfaces, and abstract classes, orga
 3. `Staff`
 4. `Course`
 5. `EngagementStrategy` (can be interpreted as an abstract class in some contexts)
+
+### Class Hierachey Diagram
+![ClassHirachy](https://github.com/user-attachments/assets/ff006eb2-caa8-4884-a553-32fc567a82b1)
+
+
+### Complete UML diagram
+![ClassDiagrams](https://github.com/user-attachments/assets/99ba5ba2-fdbc-4fb0-bb5e-ab6581619c94)
+
 
 
