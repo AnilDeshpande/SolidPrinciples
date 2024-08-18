@@ -228,6 +228,11 @@ This project consists of various classes, interfaces, and abstract classes, orga
 4. `Course`
 5. `EngagementStrategy` (interpreted as an interface, but could be seen as abstract in some contexts)
 
+## Class Heirachy
+![ClassHirachy](https://github.com/user-attachments/assets/44020ca9-8402-412e-9f4c-c6f6bd3bc2ed)
 
 
+## UML Digaram
+
+![ClassDiagrams](https://github.com/user-attachments/assets/03f2f8bb-eafc-418f-ae8a-96a63af98c6e)
 
