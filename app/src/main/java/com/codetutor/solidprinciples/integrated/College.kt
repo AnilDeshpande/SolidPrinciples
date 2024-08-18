@@ -5,15 +5,18 @@ import com.codetutor.solidprinciples.integrated.calculators.SalaryCalculator
 import com.codetutor.solidprinciples.integrated.calculators.VisitingSalaryCalculator
 import com.codetutor.solidprinciples.integrated.managers.EngagementManager
 import com.codetutor.solidprinciples.integrated.managers.EngagementStrategy
+import com.codetutor.solidprinciples.integrated.managers.IEngagementManager
+import com.codetutor.solidprinciples.integrated.managers.IStaffManager
+import com.codetutor.solidprinciples.integrated.managers.IStudentManager
 import com.codetutor.solidprinciples.integrated.managers.LectureEngagement
 import com.codetutor.solidprinciples.integrated.managers.StaffManager
 import com.codetutor.solidprinciples.integrated.managers.StudentManager
 import com.codetutor.solidprinciples.integrated.managers.WorkshopEngagement
 
 class College(
-    private val staffManager: StaffManager,
-    private val studentManager: StudentManager,
-    private val engagementManager: EngagementManager
+    private val staffManager: IStaffManager,
+    private val studentManager: IStudentManager,
+    private val engagementManager: IEngagementManager
 ) {
     private val departments: MutableList<Department> = mutableListOf()
     private val staff: MutableList<Staff> = mutableListOf()
