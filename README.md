@@ -170,5 +170,64 @@ This project consists of several classes, interfaces, and abstract classes, orga
 ### Complete UML diagram
 ![ClassDiagrams](https://github.com/user-attachments/assets/99ba5ba2-fdbc-4fb0-bb5e-ab6581619c94)
 
+## Project Structure Overview
+
+This project consists of various classes, interfaces, and abstract classes, organized as follows:
+
+### Total Count: 57
+
+- **Classes**: 27
+- **Interfaces**: 15
+- **Abstract Classes**: 5
+
+### Breakdown:
+
+#### Classes (27):
+1. `College`
+2. `AcademicDepartment`
+3. `NonAcademicDepartment`
+4. `UndergraduateStudent`
+5. `PostGraduateStudent`
+6. `PhdStudent`
+7. `PostDocStudent`
+8. `UndergraduateCourse`
+9. `PostGraduateCourse`
+10. `PhdCourse`
+11. `PostDocCourse`
+12. `AcademicStaff`
+13. `NonAcademicStaff`
+14. `VisitingStaff`
+15. `Address`
+16. `StaffManager`
+17. `StudentManager`
+18. `EngagementManager`
+19. `WorkshopEngagement`
+20. `LectureEngagement`
+21. `VisitingSalaryCalculator`
+22. `AcademicSalaryCalculator`
+
+#### Interfaces (15):
+1. `CourseTypeProvider`
+2. `SalaryReceivingStaff`
+3. `SalaryCalculator`
+4. `PayslipGenerator`
+5. `BonusApplier`
+6. `TDSCalculator`
+7. `EngagementStrategy`
+8. `TenureProvider`
+9. `DetailedAddress`
+10. `MaterialPreperator`
+11. `IStaffManager`
+12. `IStudentManager`
+13. `IEngagementManager`
+
+#### Abstract Classes (5):
+1. `Department`
+2. `Student`
+3. `Staff`
+4. `Course`
+5. `EngagementStrategy` (interpreted as an interface, but could be seen as abstract in some contexts)
+
+
 
 

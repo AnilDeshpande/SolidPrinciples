@@ -44,4 +44,7 @@ MaterialPreperator <|.. LectureEngagement
 SalaryReceivingStaff <|.. AcademicStaff
 SalaryReceivingStaff <|.. NonAcademicStaff
 
+IStudentManager <|.. StudentManager
+IStaffManager <|.. StaffManager
+StaffManager <|.. EngagementManager
 @enduml

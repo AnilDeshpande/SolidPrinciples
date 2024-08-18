@@ -9,20 +9,21 @@ skinparam class {
 
 package "com.codetutor.solidprinciples.integrated" {
 
-    class College {
-        - staffManager: StaffManager
-        - studentManager: StudentManager
-        - engagementManager: EngagementManager
-        - departments: MutableList<Department>
-        - staff: MutableList<Staff>
-        - students: MutableList<Student>
-        - courses: MutableList<Course>
 
-        + addDepartment(department: Department)
-        + addStudent(student: Student)
-        + addCourse(course: Course)
-        + assignStaffToDepartment(staffMember: Staff, department: Department)
-        + engageStudents(staffMember: Staff, subject: String, students: List<Student>)
+
+    class College {
+        -departments: MutableList<Department>
+        -staff: MutableList<Staff>
+        -students: MutableList<Student>
+        -courses: MutableList<Course>
+        -staffManager: IStaffManager
+        -studentManager: IStudentManager
+        -engagementManager: IEngagementManager
+        +addDepartment(department: Department)
+        +addStudent(student: Student)
+        +addCourse(course: Course)
+        +assignStaffToDepartment(staffMember: Staff, department: Department)
+        +engageStudents(staffMember: Staff, subject: String, students: List<Student>)
     }
 
     abstract class Department {
@@ -160,17 +161,32 @@ package "com.codetutor.solidprinciples.integrated.managers" {
         + engageStudents(staff: Staff, subject: String, students: List<Student>)
     }
 
-    class StaffManager {
-        + assignStaffToDepartment(staff: Staff, department: Department)
+    interface IStudentManager {
+            +registerStudent(students: MutableList<Student>, student: Student)
+            +engageStudents(staff: Staff, subject: String, students: List<Student>)
+        }
+
+    interface IStaffManager {
+        +assignStaffToDepartment(staff: Staff, department: Department)
     }
 
-    class StudentManager {
-        + registerStudent(students: MutableList<Student>, student: Student)
-        + engageStudents(staff: Staff, subject: String, students: List<Student>)
+    interface IEngagementManager {
+        +engageStudents(staff: Staff, subject: String, students: List<Student>)
     }
 
-    class EngagementManager {
-        + engageStudents(staff: Staff, subject: String, students: List<Student>)
+    class StudentManager implements IStudentManager {
+        -engagementManager: IEngagementManager
+        +registerStudent(students: MutableList<Student>, student: Student)
+        +engageStudents(staff: Staff, subject: String, students: List<Student>)
+    }
+
+    class StaffManager implements IStaffManager {
+        +assignStaffToDepartment(staff: Staff, department: Department)
+    }
+
+    class EngagementManager implements IEngagementManager {
+        -strategies: Map<String, EngagementStrategy>
+        +engageStudents(staff: Staff, subject: String, students: List<Student>)
     }
 
     class WorkshopEngagement implements EngagementStrategy {
@@ -187,48 +203,71 @@ package "com.codetutor.solidprinciples.integrated.managers" {
     }
 }
 
-' Student has an address
+' Class Hierarchy
+Department <|-- AcademicDepartment
+Department <|-- NonAcademicDepartment
+
+Student <|-- UndergraduateStudent
+Student <|-- PostGraduateStudent
+Student <|-- PhdStudent
+Student <|-- PostDocStudent
+
+Course <|-- UndergraduateCourse
+Course <|-- PostGraduateCourse
+Course <|-- PhdCourse
+Course <|-- PostDocCourse
+
+Staff <|-- AcademicStaff
+Staff <|-- NonAcademicStaff
+Staff <|-- VisitingStaff
+
+SalaryCalculator <|.. AcademicSalaryCalculator
+SalaryCalculator <|.. VisitingSalaryCalculator
+
+EngagementStrategy <|.. LectureEngagement
+EngagementStrategy <|.. WorkshopEngagement
+
+IStaffManager <|.. StaffManager
+IStudentManager <|.. StudentManager
+IEngagementManager <|.. EngagementManager
+
+' Associations, Multiplicity, and Labels
+College "1" -- "*" Department : has >
+College "1" -- "*" Staff : employs >
+College "1" -- "*" Student : enrolls >
+College "1" -- "*" Course : offers >
+College "1" -- "1" IStaffManager : uses >
+College "1" -- "1" IStudentManager : uses >
+College "1" -- "1" IEngagementManager : uses >
+
+Department "1" -- "*" Course : includes >
+Department "1" -- "*" Staff : employs >
+Department "1" -- "*" Student : contains >
+
+Staff "1" -- "1" Department : belongs to >
+Staff "1" -- "*" Student : engages >
+Staff "1" -- "1" SalaryCalculator : calculates salary with >
+Staff "1" -- "1" EngagementStrategy : engages students with >
+
+Student "*" -- "*" Course : enrolls in >
+Student "1" -- "1" Department : belongs to >
 Student "1" -- "1" Address : lives at >
 
-' Course is offered by a department
 Course "1" -- "1" Department : offered by >
 
-' Course has a tenure (only for Undergraduate and PostGraduate)
-UndergraduateCourse "1" -- "1" TenureProvider : provides tenure >
-PostGraduateCourse "1" -- "1" TenureProvider : provides tenure >
-
-' Address is associated with a Student
 Address "1" -- "1" Student : belongs to >
 
-' StaffManager assigns staff to a department
 StaffManager "1" -- "*" Staff : manages >
 StaffManager "1" -- "*" Department : assigns to >
 
-' StudentManager registers students
 StudentManager "1" -- "*" Student : registers >
+StudentManager "1" -- "1" IEngagementManager : uses >
 
-' StudentManager engages students
-StudentManager "1" -- "*" Staff : engages >
-StudentManager "1" -- "*" Student : engages >
-
-' EngagementManager manages multiple strategies
 EngagementManager "1" -- "*" EngagementStrategy : manages >
-
-' EngagementManager engages students
-EngagementManager "1" -- "*" Staff : manages engagements >
+EngagementManager "1" -- "*" Staff : engages >
 EngagementManager "1" -- "*" Student : engages >
 
-' LectureEngagement is a type of EngagementStrategy
-
-
-' WorkshopEngagement is a type of EngagementStrategy
-
-
-' LectureEngagement prepares materials
 LectureEngagement "1" -- "1" MaterialPreperator : prepares materials >
-
-' SalaryCalculator is implemented by different salary calculators
-
 
 
 @enduml
